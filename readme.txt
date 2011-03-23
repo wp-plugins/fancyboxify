@@ -3,7 +3,7 @@ Contributors: omerk
 Tags: fancybox, lightbox, photo, gallery, jquery, javascript
 Requires at least: 2.6
 Tested up to: 3.1
-Stable tag: trunk
+Stable tag: 1.0
 
 This simple plugin enables Fancybox on image links. It also groups all images
 within a single post by adding rel tags.
