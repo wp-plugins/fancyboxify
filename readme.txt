@@ -6,7 +6,7 @@ Tested up to: 3.1
 Stable tag: 1.1
 
 This simple plugin enables Fancybox on image links. It also groups all images within a single
-post by adding rel tags. It can also be disabled per post.
+post by adding rel tags and can be disabled per post.
 
 == Description ==
 [Fancybox](http://fancybox.net/) is a tool for displaying images, html content and multi-media
