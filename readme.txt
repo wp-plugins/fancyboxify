@@ -3,17 +3,17 @@ Contributors: omerk
 Tags: fancybox, lightbox, photo, gallery, jquery, javascript
 Requires at least: 2.6
 Tested up to: 3.1
-Stable tag: 1.0
+Stable tag: 1.1
 
 This simple plugin enables Fancybox on image links. It also groups all images within a single
-post by adding rel tags and can be disabled per post.
+post by adding rel attributes and can be disabled per post.
 
 == Description ==
 [Fancybox](http://fancybox.net/) is a tool for displaying images, html content and multi-media
 in a Mac-style "lightbox" that floats overtop of web page. It was built using the jQuery library.
 
 This plugin inserts the necessary elements required to run Fancybox on your blog. It also groups
-images within posts using rel tags. (Based on the code found on [this](http://wordpress.org/support/topic/automatic-adding-lightbox-rel-and-group-to-images-in-posts)
+images within posts using rel attributes. (Based on the code found on [this](http://wordpress.org/support/topic/automatic-adding-lightbox-rel-and-group-to-images-in-posts)
 forum thread)
 
 To disable Fancybox per post: Add a custom field called 'nofancybox' and set it's value to 'true'.
