@@ -2,8 +2,8 @@
 /*
 Plugin Name: Fancyboxify
 Plugin URI: http://wordpress.org/extend/plugins/fancyboxify/
-Description: Enables <a href="http://fancybox.net/">Fancybox</a> on all image links, also groups images within posts (inspired by <a href="http://wordpress.org/support/topic/automatic-adding-lightbox-rel-and-group-to-images-in-posts">this</a> forum thread).
-Version: 1.0
+Description: Enables <a href="http://fancybox.net/">Fancybox</a> on all image links, also groups images within posts. Can be disabled per post (Instructions at plugin homepage).
+Version: 1.1
 Author: Omer Kilic
 Author URI: http://omer.me/2011/03/fancyboxify
 */
@@ -39,15 +39,17 @@ echo <<<FANCY
 		var imglinks = $('a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"], a[href$=".JPG"], a[href$=".JPEG"], a[href$=".PNG"], a[href$=".GIF"]');
 
 		imglinks.each(function(){ 
-			$(this).fancybox({
-				'transitionIn'	:	'none',
-				'transitionOut'	:	'none',
-				'titlePosition'	:	'over',
-				'titleFormat'	:	function(title, currentArray, currentIndex, currentOpts){
-								return '<span id="fancybox-title-over">(' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ')&nbsp;&nbsp;' + title : ')') + '</span>';
-							},
-				'title'		:	$(this).find("img").first().attr("title")	// Extract title from the first <img> element within the <a>
-			});
+			if ( $(this).attr('rel').indexOf("fancybox") != -1 ) {
+				$(this).fancybox({
+					'transitionIn'	:	'none',
+					'transitionOut'	:	'none',
+					'titlePosition'	:	'over',
+					'titleFormat'	:	function(title, currentArray, currentIndex, currentOpts){
+									return '<span id="fancybox-title-over">(' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ')&nbsp;&nbsp;' + title : ')') + '</span>';
+								},
+					'title'		:	$(this).find("img").first().attr("title")	// Extract title from the first <img> element within the <a>
+				});
+			}
 		});
 	});
 </script>
@@ -55,18 +57,24 @@ FANCY;
 
 }
 
-// Shamelessly stolen from: http://wordpress.org/support/topic/automatic-adding-lightbox-rel-and-group-to-images-in-posts
+
 function fancybox_rel($content)
 {
+	global $post;
 
-   global $post;
+	// Acquire the 'nofancybox' custom field
+	$nofancybox = (bool) get_post_meta($post->ID, 'nofancybox', TRUE);
 
-   $pattern = "/<a(.*?)href=('|\")([^>]*).(bmp|gif|jpeg|jpg|png)('|\")(.*?)>(.*?)<\/a>/i";
-   $replacement = '<a$1href=$2$3.$4$5 rel="fancybox-' . $post->ID . '"$6>$7</a>';
-   $content = preg_replace($pattern, $replacement, $content);
+	// Check if we should add the 'rel' attribute or not.
+	// Fancybox won't fire unless 'rel' contains 'fancybox'.
+	if ( !$nofancybox ){
+		// Shamelessly stolen from: http://wordpress.org/support/topic/automatic-adding-lightbox-rel-and-group-to-images-in-posts
+		$pattern = "/<a(.*?)href=('|\")([^>]*).(bmp|gif|jpeg|jpg|png)('|\")(.*?)>(.*?)<\/a>/i";
+		$replacement = '<a$1href=$2$3.$4$5 rel="fancybox-' . $post->ID . '"$6>$7</a>';
+	 	$content = preg_replace($pattern, $replacement, $content);
+	}
 
-   return $content;
-
+	return $content;
 }
 
 ?>
