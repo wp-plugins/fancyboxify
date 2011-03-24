@@ -5,8 +5,8 @@ Requires at least: 2.6
 Tested up to: 3.1
 Stable tag: 1.1
 
-This simple plugin enables Fancybox on image links. It also groups all images within a single
-post by adding rel attributes and can be disabled per post.
+This simple plugin enables Fancybox on image links. It groups all images within a single post 
+and can also be disabled per post.
 
 == Description ==
 [Fancybox](http://fancybox.net/) is a tool for displaying images, html content and multi-media
@@ -41,7 +41,7 @@ the available plugins in the repository fit the bill, so I created this.
 == Changelog ==
 
 = 1.1 =
-* Released 24/03/2011
+* Released: 24/03/2011
 * Added the option to disable Fancybox on a single post (Add 'nofancybox' as a custom field 
 and set it's value to 'true')
 
